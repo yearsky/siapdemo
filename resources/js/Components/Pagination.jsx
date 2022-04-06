@@ -8,7 +8,7 @@ export default function Pagination({links}) {
                 {links.map((link, k) => (
                 <li key={k} className={`page-item ${link.active && 'active'} ${link.url === null && 'disabled'}`}>
                     <Link disabled={link.url === null ? true :false} as="button" className="page-link" key={k} href={ link.url || '' } dangerouslySetInnerHTML={{ __html: link.label }}/>
-                </li>  
+                </li>
                 ))}
             </ul>
         </nav>

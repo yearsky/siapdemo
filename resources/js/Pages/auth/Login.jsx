@@ -4,8 +4,8 @@ import Guest from '../../Layouts/Guest'
 
 export default function Login({errors}) {
     const { data, setData, post } = useForm({
-        no_handphone: '',
-        password: '', 
+        email: '',
+        password: '',
         remember:'',
     })
 
@@ -14,7 +14,8 @@ export default function Login({errors}) {
     const submitHandler = (event) =>{
         event.preventDefault();
         post(route('login'), data);
-        // console.log(errors);
+        console.log(data)
+        console.log(errors);
     }
 
     return (
@@ -23,9 +24,9 @@ export default function Login({errors}) {
             <h1 className="mb-3 text-18 text-center t-font-boldest">Sign In</h1>
             <form onSubmit={submitHandler} noValidate>
                 <div className="form-group">
-                    <label htmlFor="no_handphone" className="t-font-boldest">Phone</label>
-                    <input value={data.no_handphone} onChange={changeHandler} id="no_handphone" type="text" className={`form-control form-control-rounded ${errors.no_handphone && 'is-invalid'}`} name="no_handphone" required autoComplete="off" placeholder="Number Phone"/>
-                    {errors.no_handphone && (<div className="text-danger">Wrong Number Phone</div>)}
+                    <label htmlFor="email" className="t-font-boldest">Email</label>
+                    <input value={data.email} onChange={changeHandler} id="email" type="text" className={`form-control form-control-rounded ${errors.email && 'is-invalid'}`} name="email" required autoComplete="off" placeholder="Username/Email"/>
+                    {errors.email && (<div className="text-danger">Wrong Email</div>)}
                 </div>
                 <div className="form-group">
                     <label htmlFor="password" className="t-font-boldest">Password</label>
