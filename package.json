@@ -1,0 +1,42 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.14.5",
+        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0-rc.0",
+        "axios": "^0.21",
+        "browser-sync": "^2.27.5",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "laravel-mix": "^6.0.39",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14",
+        "react-refresh": "^0.10.0",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.41.1",
+        "sass-loader": "^12.1.0"
+    },
+    "dependencies": {
+        "@inertiajs/inertia": "^0.10.1",
+        "@inertiajs/inertia-react": "^0.7.1",
+        "@inertiajs/progress": "^0.2.6",
+        "@popperjs/core": "^2.10.1",
+        "bootstrap": "^5.1.1",
+        "devextreme": "21.2.3",
+        "devextreme-react": "21.2.3",
+        "hot": "0.0.7",
+        "jquery": "^3.6.0",
+        "perfect-scrollbar": "^1.5.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-hot-toast": "^2.1.1",
+        "whatwg-fetch": "^3.6.2"
+    }
+}
