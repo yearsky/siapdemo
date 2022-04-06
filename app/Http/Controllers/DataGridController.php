@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DataGridController extends Controller
-{
+class DataGridController extends Controller {
     /**
      * Handle the incoming request.
      *
@@ -13,13 +12,11 @@ class DataGridController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->middleware('auth');        
+    public function __construct() {
+        $this->middleware('auth');
     }
 
-    public function __invoke(Request $request)
-    {
+    public function __invoke(Request $request) {
         return inertia('Datagrid');
     }
 }
