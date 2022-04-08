@@ -14,7 +14,7 @@ $(document).ready(function () {
         changeCssLink: function changeCssLink(storageKey, fileUrl) {
             localStorage.setItem(storageKey, fileUrl);
             location.reload();
-        }
+        },
     };
 
     // Search toggle
@@ -43,13 +43,17 @@ $(document).ready(function () {
         var $el = $(this);
         var ps = new PerfectScrollbar(this, {
             suppressScrollX: $el.data("suppress-scroll-x"),
-            suppressScrollY: $el.data("suppress-scroll-y")
+            suppressScrollY: $el.data("suppress-scroll-y"),
         });
     });
 
     // Full screen
     function cancelFullScreen(el) {
-        var requestMethod = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullscreen;
+        var requestMethod =
+            el.cancelFullScreen ||
+            el.webkitCancelFullScreen ||
+            el.mozCancelFullScreen ||
+            el.exitFullscreen;
         if (requestMethod) {
             // cancel full screen.
             requestMethod.call(el);
@@ -64,7 +68,11 @@ $(document).ready(function () {
 
     function requestFullScreen(el) {
         // Supports most browsers and their versions.
-        var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+        var requestMethod =
+            el.requestFullScreen ||
+            el.webkitRequestFullScreen ||
+            el.mozRequestFullScreen ||
+            el.msRequestFullscreen;
 
         if (requestMethod) {
             // Native full screen.
@@ -81,7 +89,11 @@ $(document).ready(function () {
 
     function toggleFullscreen() {
         var elem = document.body;
-        var isInFullScreen = document.fullScreenElement && document.fullScreenElement !== null || document.mozFullScreen || document.webkitIsFullScreen;
+        var isInFullScreen =
+            (document.fullScreenElement &&
+                document.fullScreenElement !== null) ||
+            document.mozFullScreen ||
+            document.webkitIsFullScreen;
 
         if (isInFullScreen) {
             cancelFullScreen(document);

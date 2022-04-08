@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 $(document).ready(function () {
-    $('.basic-ladda-button').on('click', function (e) {
+    $(".basic-ladda-button").on("click", function (e) {
         var laddaBtn = e.currentTarget;
         var l = Ladda.create(laddaBtn);
         l.start();
@@ -10,7 +10,7 @@ $(document).ready(function () {
         }, 3000);
     });
 
-    $('.example-button').on('click', function (e) {
+    $(".example-button").on("click", function (e) {
         var laddaBtn = e.currentTarget;
         var l = Ladda.create(laddaBtn);
         l.start();

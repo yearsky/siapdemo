@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // simple Bubble Chart
 
     /*
@@ -14,8 +14,10 @@ $(document).ready(function() {
         var i = 0;
         var Simpleseries = [];
         while (i < count) {
-            var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;;
-            var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+            var x = Math.floor(Math.random() * (750 - 1 + 1)) + 1;
+            var y =
+                Math.floor(Math.random() * (yrange.max - yrange.min + 1)) +
+                yrange.min;
             var z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
 
             Simpleseries.push([x, y, z]);
@@ -25,59 +27,59 @@ $(document).ready(function() {
         return Simpleseries;
     }
 
-
     var Simpleoptions = {
         chart: {
             height: 350,
-            type: 'bubble',
+            type: "bubble",
             toolbar: {
-                show: false
-            }
+                show: false,
+            },
         },
         dataLabels: {
-            enabled: false
+            enabled: false,
         },
-        series: [{
-                name: 'Bubble1',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+        series: [
+            {
+                name: "Bubble1",
+                data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
                     min: 10,
-                    max: 60
-                })
+                    max: 60,
+                }),
             },
             {
-                name: 'Bubble2',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                name: "Bubble2",
+                data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
                     min: 10,
-                    max: 60
-                })
+                    max: 60,
+                }),
             },
             {
-                name: 'Bubble3',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                name: "Bubble3",
+                data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
                     min: 10,
-                    max: 60
-                })
+                    max: 60,
+                }),
             },
             {
-                name: 'Bubble4',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                name: "Bubble4",
+                data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
                     min: 10,
-                    max: 60
-                })
-            }
+                    max: 60,
+                }),
+            },
         ],
         fill: {
-            opacity: 0.8
+            opacity: 0.8,
         },
 
         xaxis: {
             tickAmount: 12,
-            type: 'category',
+            type: "category",
         },
         yaxis: {
-            max: 70
-        }
-    }
+            max: 70,
+        },
+    };
 
     var Simplechart = new ApexCharts(
         document.querySelector("#simpleBubble"),
@@ -101,7 +103,9 @@ $(document).ready(function() {
         var dseries = [];
         while (i < count) {
             //var x =Math.floor(Math.random() * (750 - 1 + 1)) + 1;;
-            var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+            var y =
+                Math.floor(Math.random() * (yrange.max - yrange.min + 1)) +
+                yrange.min;
             var z = Math.floor(Math.random() * (75 - 15 + 1)) + 15;
 
             dseries.push([baseval, y, z]);
@@ -111,63 +115,63 @@ $(document).ready(function() {
         return dseries;
     }
 
-
     var doptions = {
         chart: {
             height: 350,
-            type: 'bubble',
+            type: "bubble",
         },
         dataLabels: {
-            enabled: false
+            enabled: false,
         },
-        series: [{
-                name: 'Product1',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+        series: [
+            {
+                name: "Product1",
+                data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
                     min: 10,
-                    max: 60
-                })
+                    max: 60,
+                }),
             },
             {
-                name: 'Product2',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                name: "Product2",
+                data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
                     min: 10,
-                    max: 60
-                })
+                    max: 60,
+                }),
             },
             {
-                name: 'Product3',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                name: "Product3",
+                data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
                     min: 10,
-                    max: 60
-                })
+                    max: 60,
+                }),
             },
             {
-                name: 'Product4',
-                data: generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+                name: "Product4",
+                data: generateData(new Date("11 Feb 2017 GMT").getTime(), 20, {
                     min: 10,
-                    max: 60
-                })
-            }
+                    max: 60,
+                }),
+            },
         ],
         fill: {
-            type: 'gradient',
+            type: "gradient",
         },
 
         xaxis: {
             tickAmount: 12,
-            type: 'datetime',
+            type: "datetime",
 
             labels: {
                 rotate: 0,
-            }
+            },
         },
         yaxis: {
-            max: 70
+            max: 70,
         },
         theme: {
-            palette: 'palette2'
-        }
-    }
+            palette: "palette2",
+        },
+    };
 
     var dchart = new ApexCharts(
         document.querySelector("#threeDBubble"),
@@ -175,5 +179,4 @@ $(document).ready(function() {
     );
 
     dchart.render();
-
 });

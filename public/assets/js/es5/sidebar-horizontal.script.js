@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 $(document).ready(function () {
-    $('.menu-toggle').on('click', function (e) {
+    $(".menu-toggle").on("click", function (e) {
         e.preventDefault();
-        $('.header-topnav').toggleClass('open');
+        $(".header-topnav").toggleClass("open");
     });
 });

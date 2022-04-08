@@ -1,20 +1,32 @@
-'use strict';
+"use strict";
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends =
+    Object.assign ||
+    function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
+    };
 
 var echartOptions = {
     get smoothLine() {
         return {
-            type: 'line',
-            smooth: true
+            type: "line",
+            smooth: true,
         };
     },
     get lineShadow() {
         return {
-            shadowColor: 'rgba(0, 0, 0, .2)',
+            shadowColor: "rgba(0, 0, 0, .2)",
             shadowOffsetX: -1,
             shadowOffsetY: 8,
-            shadowBlur: 10
+            shadowBlur: 10,
         };
     },
     get gridNoAxis() {
@@ -23,56 +35,62 @@ var echartOptions = {
             top: 5,
             left: 0,
             right: 0,
-            bottom: 0
+            bottom: 0,
         };
     },
     get pieRing() {
         return {
-            radius: ['50%', '60%'],
+            radius: ["50%", "60%"],
             selectedMode: true,
             selectedOffset: 0,
-            avoidLabelOverlap: false
+            avoidLabelOverlap: false,
         };
     },
     get pieLabelOff() {
         return {
             label: { show: false },
-            labelLine: { show: false, emphasis: { show: false } }
+            labelLine: { show: false, emphasis: { show: false } },
         };
     },
     get pieLabelCenterHover() {
         return {
             normal: {
                 show: false,
-                position: 'center'
+                position: "center",
             },
             emphasis: {
                 show: true,
                 textStyle: {
-                    fontWeight: 'bold'
-                }
-            }
+                    fontWeight: "bold",
+                },
+            },
         };
     },
     get pieLineStyle() {
-        return _extends({
-            color: 'rgba(0,0,0,0)',
-            borderWidth: 2
-        }, this.lineShadow);
+        return _extends(
+            {
+                color: "rgba(0,0,0,0)",
+                borderWidth: 2,
+            },
+            this.lineShadow
+        );
     },
     get pieThikLineStyle() {
-        return _extends({
-            color: 'rgba(0,0,0,0)',
-            borderWidth: 12
-        }, this.lineShadow);
+        return _extends(
+            {
+                color: "rgba(0,0,0,0)",
+                borderWidth: 12,
+            },
+            this.lineShadow
+        );
     },
     get gridAlignLeft() {
         return {
             show: false,
             top: 6,
             right: 0,
-            left: '-6%',
-            bottom: 0
+            left: "-6%",
+            bottom: 0,
         };
     },
     get defaultOptions() {
@@ -82,21 +100,21 @@ var echartOptions = {
                 top: 6,
                 right: 0,
                 left: 0,
-                bottom: 0
+                bottom: 0,
             },
             tooltip: {
                 show: true,
-                backgroundColor: 'rgba(0, 0, 0, .8)'
+                backgroundColor: "rgba(0, 0, 0, .8)",
             },
             xAxis: {
-                type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                show: true
+                type: "category",
+                data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                show: true,
             },
             yAxis: {
-                type: 'value',
-                show: false
-            }
+                type: "value",
+                show: false,
+            },
         };
     },
     get lineFullWidth() {
@@ -104,22 +122,22 @@ var echartOptions = {
             grid: {
                 show: false,
                 top: 0,
-                right: '-9%',
-                left: '-8.5%',
-                bottom: 0
+                right: "-9%",
+                left: "-8.5%",
+                bottom: 0,
             },
             tooltip: {
                 show: true,
-                backgroundColor: 'rgba(0, 0, 0, .8)'
+                backgroundColor: "rgba(0, 0, 0, .8)",
             },
             xAxis: {
-                type: 'category',
-                show: true
+                type: "category",
+                show: true,
             },
             yAxis: {
-                type: 'value',
-                show: false
-            }
+                type: "value",
+                show: false,
+            },
         };
     },
     get lineNoAxis() {
@@ -127,38 +145,38 @@ var echartOptions = {
             grid: this.gridNoAxis,
             tooltip: {
                 show: true,
-                backgroundColor: 'rgba(0, 0, 0, .8)'
+                backgroundColor: "rgba(0, 0, 0, .8)",
             },
             xAxis: {
-                type: 'category',
+                type: "category",
                 axisLine: {
-                    show: false
+                    show: false,
                 },
                 axisLabel: {
                     textStyle: {
-                        color: '#ccc'
-                    }
-                }
+                        color: "#ccc",
+                    },
+                },
             },
             yAxis: {
-                type: 'value',
+                type: "value",
                 splitLine: {
                     lineStyle: {
-                        color: 'rgba(0, 0, 0, .1)'
-                    }
+                        color: "rgba(0, 0, 0, .1)",
+                    },
                 },
                 axisLine: {
-                    show: false
+                    show: false,
                 },
                 axisTick: {
-                    show: false
+                    show: false,
                 },
                 axisLabel: {
                     textStyle: {
-                        color: '#ccc'
-                    }
-                }
-            }
+                        color: "#ccc",
+                    },
+                },
+            },
         };
-    }
+    },
 };

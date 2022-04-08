@@ -4,9 +4,11 @@ import {
     DataGrid,
     Column,
     Editing,
+    SearchPanel,
     Scrolling,
     Lookup,
     Summary,
+    HeaderFilter,
     TotalItem,
 } from "devextreme-react/data-grid";
 import { Button } from "devextreme-react/button";
@@ -16,7 +18,8 @@ import CustomStore from "devextreme/data/custom_store";
 import { formatDate } from "devextreme/localization";
 import "whatwg-fetch";
 
-const URL = "https://js.devexpress.com/Demos/Mvc/api/DataGridWebApi";
+// const URL = "http://127.0.0.1:8000";
+const URL = "https://api.bintangteknik.id/api";
 
 const REFRESH_MODES = ["full", "reshape", "repaint"];
 
@@ -26,32 +29,32 @@ class CustomerGrid extends React.Component {
 
         this.state = {
             ordersData: new CustomStore({
-                key: "OrderID",
-                load: () => this.sendRequest(`${URL}/Orders`),
+                key: "id",
+                load: () => this.sendRequest(`${URL}/customer`),
                 insert: (values) =>
-                    this.sendRequest(`${URL}/InsertOrder`, "POST", {
+                    this.sendRequest(`${URL}/customer`, "POST", {
                         values: JSON.stringify(values),
                     }),
                 update: (key, values) =>
-                    this.sendRequest(`${URL}/UpdateOrder`, "PUT", {
+                    this.sendRequest(`${URL}/customer/${key}`, "PUT", {
                         key,
                         values: JSON.stringify(values),
                     }),
                 remove: (key) =>
-                    this.sendRequest(`${URL}/DeleteOrder`, "DELETE", {
+                    this.sendRequest(`${URL}/customer/${key}`, "DELETE", {
                         key,
                     }),
             }),
-            customersData: new CustomStore({
-                key: "Value",
-                loadMode: "raw",
-                load: () => this.sendRequest(`${URL}/CustomersLookup`),
-            }),
-            shippersData: new CustomStore({
-                key: "Value",
-                loadMode: "raw",
-                load: () => this.sendRequest(`${URL}/ShippersLookup`),
-            }),
+            // customersData: new CustomStore({
+            //     key: "Value",
+            //     loadMode: "raw",
+            //     load: () => this.sendRequest(`${URL}/CustomersLookup`),
+            // }),
+            // shippersData: new CustomStore({
+            //     key: "Value",
+            //     loadMode: "raw",
+            //     load: () => this.sendRequest(`${URL}/ShippersLookup`),
+            // }),
             requests: [],
             refreshMode: "reshape",
         };
@@ -66,7 +69,7 @@ class CustomerGrid extends React.Component {
         if (method === "GET") {
             return fetch(url, {
                 method,
-                credentials: "include",
+                withCredentials: true,
             }).then((result) =>
                 result.json().then((json) => {
                     if (result.ok) return json.data;
@@ -88,10 +91,11 @@ class CustomerGrid extends React.Component {
             method,
             body: params,
             headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 "Content-Type":
                     "application/x-www-form-urlencoded;charset=UTF-8",
             },
-            credentials: "include",
+            withCredentials: true,
         }).then((result) => {
             if (result.ok) {
                 return result.text().then((text) => text && JSON.parse(text));
@@ -122,6 +126,14 @@ class CustomerGrid extends React.Component {
     handleRefreshModeChange(e) {
         this.setState({ refreshMode: e.value });
     }
+    onRowInserted(e) {
+        e.component.navigateToRow(e.key);
+        console.log("new row " + e.key);
+    }
+    onInitNewRow(e) {
+        e.component.navigateToRow(e.key);
+        console.log("init new row " + e.key);
+    }
 
     render() {
         const { refreshMode, ordersData, customersData, shippersData } =
@@ -132,7 +144,8 @@ class CustomerGrid extends React.Component {
                     id="grid"
                     showBorders={true}
                     dataSource={ordersData}
-                    repaintChangesOnly={true}
+                    onRowInserted={this.onRowInserted}
+                    onInitNewRow={this.onInitNewRow}
                 >
                     <Editing
                         mode="popup"
@@ -140,41 +153,50 @@ class CustomerGrid extends React.Component {
                         allowDeleting={true}
                         allowUpdating={true}
                     />
+                    <SearchPanel visible={true} />
+                    <HeaderFilter visible={true} />
 
                     <Scrolling mode="standard" />
 
-                    <Column dataField="CustomerID" caption="Customer">
-                        <Lookup
+                    <Column
+                        dataField="KodeCust"
+                        caption="Kode Customer"
+                    ></Column>
+
+                    <Column dataField="NamaCust" caption="Customer">
+                        {/* <Lookup
                             dataSource={customersData}
                             valueExpr="Value"
                             displayExpr="Text"
-                        />
+                        /> */}
                     </Column>
 
-                    <Column dataField="OrderDate" dataType="date"></Column>
+                    <Column dataField="Alamat1"></Column>
 
-                    <Column dataField="Freight"></Column>
+                    <Column dataField="Alamat2"></Column>
 
-                    <Column dataField="ShipCountry"></Column>
+                    <Column dataField="Kota"></Column>
+                    <Column dataField="KodePos"></Column>
+                    <Column dataField="Negara"></Column>
 
-                    <Column
+                    {/* <Column
                         dataField="ShipVia"
                         caption="Shipping Company"
                         dataType="number"
-                    >
-                        <Lookup
+                    > */}
+                    {/* <Lookup
                             dataSource={shippersData}
                             valueExpr="Value"
                             displayExpr="Text"
-                        />
-                    </Column>
+                        /> */}
+                    {/* </Column> */}
                     <Summary>
-                        <TotalItem column="CustomerID" summaryType="count" />
-                        <TotalItem
+                        <TotalItem column="id" summaryType="count" />
+                        {/* <TotalItem
                             column="Freight"
                             summaryType="sum"
                             valueFormat="#0.00"
-                        />
+                        /> */}
                     </Summary>
                 </DataGrid>
             </React.Fragment>

@@ -1,130 +1,117 @@
-
-$(document).ready(function(){
+$(document).ready(function () {
     "use strict";
 
     var $todoListButton = $(".ul-contact-mobile-icon");
     var $todoSidebar = $(".ul-todo-sidebar");
-    var $todoSidebarClose = $(".todo-sidebar-close ")
+    var $todoSidebarClose = $(".todo-sidebar-close ");
 
-    $todoListButton.on("click" , function(){
-        $todoSidebar.addClass('ul-todo-sidebar open');
-    })
+    $todoListButton.on("click", function () {
+        $todoSidebar.addClass("ul-todo-sidebar open");
+    });
 
-    $todoSidebarClose.on("click", function(){
-        $todoSidebar.removeClass(' open')
-    })
+    $todoSidebarClose.on("click", function () {
+        $todoSidebar.removeClass(" open");
+    });
 
-
-
-    // CRUD operation 
+    // CRUD operation
     var persons = [
-      {
-        id: 1,
-        img: "assets/images/faces/1.jpg"
-      },
-      {
-        id: 2,
-        img: "assets/images/faces/2.jpg" 
-      },
-      {
-        id: 3,
-        img: "assets/images/faces/3.jpg" 
-      },
-      {
-        id: 4,
-        img: "assets/images/faces/4.jpg" 
-      },
-    ]
+        {
+            id: 1,
+            img: "assets/images/faces/1.jpg",
+        },
+        {
+            id: 2,
+            img: "assets/images/faces/2.jpg",
+        },
+        {
+            id: 3,
+            img: "assets/images/faces/3.jpg",
+        },
+        {
+            id: 4,
+            img: "assets/images/faces/4.jpg",
+        },
+    ];
     var users = [
         {
-          id: 1,
-          title: "Bob",
-          img: "assets/images/faces/1.jpg",
-          badge: "<span href=\"#\" class=\"badge badge-warning mr-2\">Test</span>"
-         
+            id: 1,
+            title: "Bob",
+            img: "assets/images/faces/1.jpg",
+            badge: '<span href="#" class="badge badge-warning mr-2">Test</span>',
         },
         {
-          id: 2,
-          title: "Harry",
-          img: "assets/images/faces/2.jpg"
-         
+            id: 2,
+            title: "Harry",
+            img: "assets/images/faces/2.jpg",
         },
         {
-          id: 3,
-          title: "Bob",
-          img: "assets/images/faces/3.jpg"
-         
+            id: 3,
+            title: "Bob",
+            img: "assets/images/faces/3.jpg",
         },
         {
-          id: 4,
-          title: "Harry",
-          img: "assets/images/faces/4.jpg"
-         
-        }
-      ];
+            id: 4,
+            title: "Harry",
+            img: "assets/images/faces/4.jpg",
+        },
+    ];
 
-      $('#todo-list-search').keyup(function(){
+    $("#todo-list-search").keyup(function () {
         search_table($(this).val());
-        
-      });
-      function search_table(value){
-        $('#userTable li').each(function(){
-          var found = 'false';
-          $(this).each(function(){
-            if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
-            {
-              found = 'true';
-            }
-            if(found == 'true'){
-              $(this).show();
-            }else{
-              $(this).hide();
-            }
-          });
+    });
+    function search_table(value) {
+        $("#userTable li").each(function () {
+            var found = "false";
+            $(this).each(function () {
+                if (
+                    $(this).text().toLowerCase().indexOf(value.toLowerCase()) >=
+                    0
+                ) {
+                    found = "true";
+                }
+                if (found == "true") {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
         });
-      }
-      
-    
+    }
 
-    $("form").submit(function(e) {
+    $("form").submit(function (e) {
         e.preventDefault();
-         
     });
 
-    $.each(users, function(i, user){
+    $.each(users, function (i, user) {
         appendToUserTable(user);
     });
-    
-  
-    function addUser(user){
+
+    function addUser(user) {
         users.push(user);
         appendToUserTable(user);
-    };
+    }
 
-    $("form#addUser").submit(function() {
+    $("form#addUser").submit(function () {
         var modifiedUser = {};
         var nameInput = $('input[name="title"]').val();
         var addressInput = $('textarea[name="description"]').val();
-        var selectOption = $(this).find(':selected').val();
-        var person  = persons.filter(person => person.id == selectOption);
+        var selectOption = $(this).find(":selected").val();
+        var person = persons.filter((person) => person.id == selectOption);
 
         if (nameInput && addressInput && selectOption != 0) {
-          $(this).serializeArray().map(function(data) {
-              modifiedUser[data.name] = data.value;
-              modifiedUser = {...modifiedUser, ...person[0]}
-          });
-          console.log(modifiedUser)
-          addUser(modifiedUser);
-          this.reset();  
+            $(this)
+                .serializeArray()
+                .map(function (data) {
+                    modifiedUser[data.name] = data.value;
+                    modifiedUser = { ...modifiedUser, ...person[0] };
+                });
+            console.log(modifiedUser);
+            addUser(modifiedUser);
+            this.reset();
         } else {
-          alert('All fields must have a valid value.');
+            alert("All fields must have a valid value.");
         }
-
-        
-      });
-
-      
-
+    });
 
     function appendToUserTable(user) {
         $("#userTable").append(`<li class="list-group-item">
@@ -166,6 +153,5 @@ $(document).ready(function(){
             </div>
         </div>
     </li>`);
-  }
-
+    }
 });

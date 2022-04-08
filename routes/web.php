@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DataGridController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -47,3 +48,6 @@ Route::prefix('datagrid')->name('datagrid.')->group(function () {
     Route::get('/', DataGridController::class)->name('index');
     // Route::get('/customers', DataGridController::class)->name('customers');
 });
+
+Route::get('customer', [CustomerController::class, 'showCustomer']);
+Route::post('customer', [CustomerController::class, 'insertCustomer']);

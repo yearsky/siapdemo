@@ -14,9 +14,9 @@ $(document).ready(function () {
     var $childOpenMenu = $(".ul-contact-left-side");
     var $childCloseMenu = $(".contact-close-mobile-icon");
     $mobileIcon.on("click", function () {
-        $childOpenMenu.addClass('contact-open');
+        $childOpenMenu.addClass("contact-open");
     });
     $childCloseMenu.on("click", function () {
-        $childOpenMenu.removeClass('contact-open');
+        $childOpenMenu.removeClass("contact-open");
     });
 });

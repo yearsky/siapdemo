@@ -1,28 +1,27 @@
-'use strict';
+"use strict";
 
-var _card_body = document.getElementById('card-body');
-var _card_footer = document.getElementById('card-footer');
+var _card_body = document.getElementById("card-body");
+var _card_footer = document.getElementById("card-footer");
 
-var _arrow_down = document.getElementById('arrow-down');
+var _arrow_down = document.getElementById("arrow-down");
 
-var closeWindow = document.getElementById('close-window');
-var _card = document.getElementById('card');
+var closeWindow = document.getElementById("close-window");
+var _card = document.getElementById("card");
 
-var _reload = document.getElementById('reload');
+var _reload = document.getElementById("reload");
 
-_arrow_down.addEventListener('click', minimizeButton);
+_arrow_down.addEventListener("click", minimizeButton);
 
 // minimize window
 
 function minimizeButton(e) {
-
-    _card_body.classList.toggle('active');
+    _card_body.classList.toggle("active");
 
     e.preventDefault();
 }
 
 // reload window
-_reload.addEventListener('click', _reloadFunction);
+_reload.addEventListener("click", _reloadFunction);
 
 function _reloadFunction(e) {
     _card_body.reload();
@@ -31,10 +30,10 @@ function _reloadFunction(e) {
 
 // remove window
 
-closeWindow.addEventListener('click', removeWindow);
+closeWindow.addEventListener("click", removeWindow);
 
 function removeWindow(e) {
-    _card.classList.add('active');
+    _card.classList.add("active");
 
     e.preventDefault();
 }
@@ -42,12 +41,11 @@ function removeWindow(e) {
 // Searching Js ====================================================------------------------->
 
 // get input element
-var filterInput = document.getElementById('filterInput');
+var filterInput = document.getElementById("filterInput");
 
 //Add Eventlistener
 
 // filterInput.addEventListener('keyup',filterNames);
-
 
 // function filterNames()
 // {

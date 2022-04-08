@@ -1,22 +1,73 @@
 import { Link } from "@inertiajs/inertia-react";
-import React from "react";
+import React, {useState,useEffect} from "react";
+import axios from "axios";
 
 export default function Sidebar() {
+    const currentUrl = window.location.pathname;
+
+    const [menu, setMenu] = useState([]);
+
+    // const data = [
+    //     {
+    //         name: "dashboard",
+    //         icon: "i-Bar-Chart",
+    //         link: "home.index",
+    //         dataItem: "dashboard",
+    //         children: [
+    //             {
+    //                 parent: "dashboard",
+    //                 name: "version 1",
+    //                 icon: "i-Clock-3",
+    //                 link: "#"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         name: "Home",
+    //         icon: "i-Home1",
+    //         link: ""
+    //     },
+    //     {
+    //         name: "dashboard",
+    //         icon: "i-Bar-Chart",
+    //         link: "",
+    //     },
+    //     {
+    //         name: "dashboard",
+    //         icon: "i-Bar-Chart",
+    //         link: ""
+    //     }
+    // ]
+    // console.log(data);
+
+    useEffect(()=> {
+        fetchMenu()
+    },[])
+
+    const fetchMenu = async() => {
+        await axios.get(`https://api.bintangteknik.id/api/menu`).then(({data})=>{
+            setMenu(data)
+        })
+    }
+
+    console.log(menu);
+
     return (
         <div className="side-content-wrap">
             <div className="sidebar-left open rtl-ps-none sidebarscroll">
                 <ul className="navigation-left">
-                    <li
-                        className="nav-item {{ request()->is('dashboard/*') ? 'active' : '' }}"
-                        data-item="dashboard"
-                    >
+                    <li className="nav-item" data-item="dashboard">
                         <a className="nav-item-hold" href="#">
                             <i className="nav-icon i-Bar-Chart" />
                             <span className="nav-text">Dashboard</span>
                         </a>
                         <div className="triangle" />
                     </li>
-                    <li className="nav-item {{request()->is('home') ? 'active' : '' }}">
+                    <li
+                        className={`nav-item ${
+                            currentUrl === "/home" ? "active" : ""
+                        }`}
+                    >
                         <Link
                             className="nav-item-hold"
                             href={route("home.index")}
@@ -26,47 +77,12 @@ export default function Sidebar() {
                         </Link>
                         <div className="triangle" />
                     </li>
-                    <li className="nav-item" hidden={true}>
-                        <Link
-                            className="nav-item-hold"
-                            href={route("category.index")}
-                        >
-                            <i className="nav-icon i-Receipt-4" />
-                            <span className="nav-text">Category</span>
-                        </Link>
-                        <div className="triangle" />
-                    </li>
-                    <li className="nav-item" hidden={true}>
-                        <Link
-                            className="nav-item-hold"
-                            href={route("product.index")}
-                        >
-                            <i className="nav-icon i-Checkout-Basket" />
-                            <span className="nav-text">Product</span>
-                        </Link>
-                        <div className="triangle" />
-                    </li>
-                    <li className="nav-item" hidden={true}>
-                        <Link
-                            className="nav-item-hold"
-                            href={route("users.index")}
-                        >
-                            <i className="nav-icon i-Add-User" />
-                            <span className="nav-text">Users </span>
-                        </Link>
-                        <div className="triangle" />
-                    </li>
-                    <li className="nav-item" hidden={true}>
-                        <Link
-                            className="nav-item-hold"
-                            href={route("datagrid.index")}
-                        >
-                            <i className="nav-icon i-File-Horizontal-Text" />
-                            <span className="nav-text">Index Grid</span>
-                        </Link>
-                        <div className="triangle" />
-                    </li>
-                    <li className="nav-item">
+
+                    <li
+                        className={`nav-item ${
+                            currentUrl === "/datagrid" ? "active" : ""
+                        }`}
+                    >
                         <Link
                             className="nav-item-hold"
                             href={route("datagrid.index")}
@@ -93,33 +109,7 @@ export default function Sidebar() {
                             <span className="item-name">Version 1</span>
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <a
-                            href="#"
-                            className="{{ Route::currentRouteName()=='dashboard_version_2' ? 'open' : '' }}"
-                        >
-                            <i className="nav-icon i-Clock-4" />
-                            <span className="item-name">Version 2</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            className="{{ Route::currentRouteName()=='dashboard_version_3' ? 'open' : '' }}"
-                            href="#"
-                        >
-                            <i className="nav-icon i-Over-Time" />
-                            <span className="item-name">Version 3</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a
-                            className="{{ Route::currentRouteName()=='dashboard_version_4' ? 'open' : '' }}"
-                            href="#"
-                        >
-                            <i className="nav-icon i-Clock" />
-                            <span className="item-name">Version 4</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </div>
             <div className="sidebar-overlay" />

@@ -6,7 +6,7 @@ export default function Category() {
     return (
         <div>
             <div className="breadcrumb">
-                <h1>Datagrid Index</h1>
+                <h1>Data Customer</h1>
                 <ul>
                     <li>
                         <Link href={route("home.index")}>Home</Link>
