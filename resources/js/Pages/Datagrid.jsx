@@ -2,6 +2,7 @@ import React from "react";
 import App from "../Layouts/App";
 import { Link } from "@inertiajs/inertia-react";
 import CustomerGrid from "./CustomerGrid";
+import UserGrid from "./UserGrid";
 export default function Category() {
     return (
         <div>
@@ -29,7 +30,8 @@ export default function Category() {
                         </h3>
                     </div>
                     <div className="card-body">
-                        <CustomerGrid />
+                        {/* <CustomerGrid /> */}
+                        <UserGrid />
                     </div>
                 </div>
             </div>

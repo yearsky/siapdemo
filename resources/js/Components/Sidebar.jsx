@@ -1,82 +1,50 @@
-import { Link } from "@inertiajs/inertia-react";
-import React, {useState,useEffect} from "react";
+import { Link, usePage } from "@inertiajs/inertia-react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Sidebar() {
     const currentUrl = window.location.pathname;
-
+    const { auth } = usePage().props;
+    const role = auth.user.isrole;
     const [menu, setMenu] = useState([]);
 
-    // const data = [
-    //     {
-    //         name: "dashboard",
-    //         icon: "i-Bar-Chart",
-    //         link: "home.index",
-    //         dataItem: "dashboard",
-    //         children: [
-    //             {
-    //                 parent: "dashboard",
-    //                 name: "version 1",
-    //                 icon: "i-Clock-3",
-    //                 link: "#"
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         name: "Home",
-    //         icon: "i-Home1",
-    //         link: ""
-    //     },
-    //     {
-    //         name: "dashboard",
-    //         icon: "i-Bar-Chart",
-    //         link: "",
-    //     },
-    //     {
-    //         name: "dashboard",
-    //         icon: "i-Bar-Chart",
-    //         link: ""
-    //     }
-    // ]
-    // console.log(data);
+    useEffect(() => {
+        fetchMenu();
+    }, []);
 
-    useEffect(()=> {
-        fetchMenu()
-    },[])
-
-    const fetchMenu = async() => {
-        await axios.get(`https://api.bintangteknik.id/api/menu`).then(({data})=>{
-            setMenu(data)
-        })
-    }
-
-    console.log(menu);
+    const fetchMenu = async () => {
+        await axios
+            .get(`https://api.bintangteknik.id/api/menu`)
+            .then(({ data }) => {
+                setMenu(data);
+            });
+    };
+    console.log(auth);
 
     return (
         <div className="side-content-wrap">
             <div className="sidebar-left open rtl-ps-none sidebarscroll">
                 <ul className="navigation-left">
-                    <li className="nav-item" data-item="dashboard">
-                        <a className="nav-item-hold" href="#">
-                            <i className="nav-icon i-Bar-Chart" />
-                            <span className="nav-text">Dashboard</span>
-                        </a>
-                        <div className="triangle" />
-                    </li>
-                    <li
-                        className={`nav-item ${
-                            currentUrl === "/home" ? "active" : ""
-                        }`}
-                    >
-                        <Link
-                            className="nav-item-hold"
-                            href={route("home.index")}
-                        >
-                            <i className="nav-icon i-Home1" />
-                            <span className="nav-text">Home</span>
-                        </Link>
-                        <div className="triangle" />
-                    </li>
+                    {role == "admin" ? (
+                        <>
+                            <li
+                                className={`nav-item ${
+                                    currentUrl === "/home" ? "active" : ""
+                                }`}
+                            >
+                                <Link
+                                    className="nav-item-hold"
+                                    href={route("home.index")}
+                                >
+                                    <i className="nav-icon i-Home1" />
+                                    <span className="nav-text">Home</span>
+                                </Link>
+                                <div className="triangle" />
+                            </li>
+                        </>
+                    ) : (
+                        <></>
+                    )}
 
                     <li
                         className={`nav-item ${
@@ -92,6 +60,20 @@ export default function Sidebar() {
                         </Link>
                         <div className="triangle" />
                     </li>
+                    {/* <li
+                        className={`nav-item ${
+                            currentUrl === "/usergrid" ? "active" : ""
+                        }`}
+                    >
+                        <Link
+                            className="nav-item-hold"
+                            href={route("datagrid.index")}
+                        >
+                            <i className="nav-icon i-File-Horizontal-Text" />
+                            <span className="nav-text">Customers Grid</span>
+                        </Link>
+                        <div className="triangle" />
+                    </li> */}
                 </ul>
             </div>
             <div
@@ -109,7 +91,6 @@ export default function Sidebar() {
                             <span className="item-name">Version 1</span>
                         </a>
                     </li>
-                    
                 </ul>
             </div>
             <div className="sidebar-overlay" />
