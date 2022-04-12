@@ -19,8 +19,8 @@ export default function Sidebar() {
                 setMenu(data);
             });
     };
-    console.log(auth);
-
+    // console.log(auth);
+    console.log(menu);
     return (
         <div className="side-content-wrap">
             <div className="sidebar-left open rtl-ps-none sidebarscroll">
@@ -60,6 +60,23 @@ export default function Sidebar() {
                         </Link>
                         <div className="triangle" />
                     </li>
+
+                    {/* {menu.data?.map((row, index) => (
+                        <>
+                            <li className="nav-item" key={row.id}>
+                                <Link
+                                    className="nav-item-hold"
+                                    href={route("datagrid.index")}
+                                >
+                                    <i className="nav-icon i-File-Horizontal-Text" />
+                                    <span className="nav-text">
+                                        {row.title}
+                                    </span>
+                                </Link>
+                                <div className="triangle" />
+                            </li>
+                        </>
+                    ))} */}
                     {/* <li
                         className={`nav-item ${
                             currentUrl === "/usergrid" ? "active" : ""

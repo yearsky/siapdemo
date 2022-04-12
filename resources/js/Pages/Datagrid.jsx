@@ -2,6 +2,8 @@ import React from "react";
 import App from "../Layouts/App";
 import { Link } from "@inertiajs/inertia-react";
 import CustomerGrid from "./CustomerGrid";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import UserGrid from "./UserGrid";
 export default function Category() {
     return (
@@ -19,19 +21,32 @@ export default function Category() {
             <div className="col-md-12">
                 <div className="card o-hidden mb-4">
                     <div className="card-header">
-                        <h3 className="text-end card-title m-0">
-                            <Link
+                        <h3 className="text-start card-title m-0">
+                            {/* <Link
                                 href={route("users.create")}
                                 as="button"
                                 className="btn btn-bantuibu btn-raised-primary m-1"
                             >
                                 Add User
-                            </Link>
+                            </Link> */}
+                            Data Customer
                         </h3>
                     </div>
                     <div className="card-body">
                         {/* <CustomerGrid /> */}
-                        <UserGrid />
+                        {/* <UserGrid /> */}
+                        <Tabs>
+                            <TabList>
+                                <Tab>UsersGrid</Tab>
+                                <Tab>CustomerGrid</Tab>
+                            </TabList>
+                            <TabPanel>
+                                <UserGrid />
+                            </TabPanel>
+                            <TabPanel>
+                                <CustomerGrid />
+                            </TabPanel>
+                        </Tabs>
                     </div>
                 </div>
             </div>

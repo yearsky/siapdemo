@@ -19,11 +19,11 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::resource('users', UsersController::class);
 
 
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::resource('users', UsersController::class);
 
     Route::group(['middleware' => 'checkRole:admin'], function () {
         Route::prefix('home')->name('home.')->group(function () {
@@ -46,25 +46,6 @@ Route::prefix('user')->name('user.')->group(function () {
 });
 
 
-Route::prefix('category')->name('category.')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('index');
-    Route::get('/api', [CategoryController::class, 'apiCategory']);
-
-    Route::post('/api/insert', [CategoryController::class, 'apiInsert']);
-    Route::put('/api/update/{id}', [CategoryController::class, 'apiUpdate']);
-    Route::delete('/api/delete/{id}', [CategoryController::class, 'apiDelete']);
-});
-
-Route::prefix('product')->name('product.')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('index');
-
-    Route::get('/api', [ProductController::class, 'apiProduct']);
-    // Route::get('/api/{id}', [ProductController::class, 'apiProductById']);
-
-    Route::post('/api/insert', [ProductController::class, 'apiInsert']);
-    Route::put('/api/update/{id}', [ProductController::class, 'apiUpdate']);
-    Route::delete('/api/delete/{id}', [ProductController::class, 'apiDelete']);
-});
 
 Route::prefix('datagrid')->name('datagrid.')->group(function () {
     Route::get('/', DataGridController::class)->name('index');
