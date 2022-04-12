@@ -6,6 +6,9 @@ export default function Sidebar() {
     const currentUrl = window.location.pathname;
     const { auth } = usePage().props;
     const role = auth.user.isrole;
+
+    const [dataItem, setDataItem] = useState();
+
     const [menu, setMenu] = useState([]);
 
     useEffect(() => {
@@ -13,14 +16,17 @@ export default function Sidebar() {
     }, []);
 
     const fetchMenu = async () => {
-        await axios
-            .get(`https://api.bintangteknik.id/api/menu`)
-            .then(({ data }) => {
-                setMenu(data);
-            });
+        await axios.get(`http://127.0.0.1:8000/api/side`).then(({ data }) => {
+            setMenu(data);
+        });
     };
+
+    // const handleSide = (parent) => {
+    //     setDataItem(parent);
+    // };
+
     // console.log(auth);
-    console.log(menu);
+    console.log(dataItem);
     return (
         <div className="side-content-wrap">
             <div className="sidebar-left open rtl-ps-none sidebarscroll">
@@ -60,37 +66,43 @@ export default function Sidebar() {
                         </Link>
                         <div className="triangle" />
                     </li>
-
-                    {/* {menu.data?.map((row, index) => (
-                        <>
-                            <li className="nav-item" key={row.id}>
-                                <Link
-                                    className="nav-item-hold"
-                                    href={route("datagrid.index")}
-                                >
-                                    <i className="nav-icon i-File-Horizontal-Text" />
-                                    <span className="nav-text">
-                                        {row.title}
-                                    </span>
-                                </Link>
-                                <div className="triangle" />
-                            </li>
-                        </>
-                    ))} */}
-                    {/* <li
-                        className={`nav-item ${
-                            currentUrl === "/usergrid" ? "active" : ""
-                        }`}
-                    >
-                        <Link
-                            className="nav-item-hold"
-                            href={route("datagrid.index")}
-                        >
-                            <i className="nav-icon i-File-Horizontal-Text" />
-                            <span className="nav-text">Customers Grid</span>
+                    <li className="nav-item" data-item="oke">
+                        <Link className="nav-item-hold" href="#">
+                            <i className="nav-icon i-Home1" />
+                            <span className="nav-text">Statis</span>
                         </Link>
                         <div className="triangle" />
-                    </li> */}
+                    </li>
+
+                    {menu.map((row, index) => (
+                        <>
+                            {row.treelevel === 1 && row.parent == "" ? (
+                                <>
+                                    <li
+                                        className="nav-item"
+                                        key={row}
+                                        data-item="woke"
+                                        onChange={() => setDataItem(row.L1)}
+                                    >
+                                        <Link
+                                            className="nav-item-hold"
+                                            href="#"
+                                        >
+                                            <i
+                                                className={`nav-icon ${row.icon}`}
+                                            />
+                                            <span className="nav-text">
+                                                {row.caption}
+                                            </span>
+                                        </Link>
+                                        <div className="triangle" />
+                                    </li>
+                                </>
+                            ) : (
+                                <></>
+                            )}
+                        </>
+                    ))}
                 </ul>
             </div>
             <div
@@ -98,7 +110,7 @@ export default function Sidebar() {
                 data-perfect-scrollbar
                 data-suppress-scroll-x="true"
             >
-                <ul className="childNav" data-parent="dashboard">
+                <ul className="childNav" data-parent="oke">
                     <li className="nav-item ">
                         <a
                             className="{{ Route::currentRouteName()=='dashboard_version_1' ? 'open' : '' }}"
@@ -110,6 +122,7 @@ export default function Sidebar() {
                     </li>
                 </ul>
             </div>
+
             <div className="sidebar-overlay" />
         </div>
     );

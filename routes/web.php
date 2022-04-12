@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 
+Route::get('/api/side', [HomeController::class, 'sidebar'])->name('sidebars');
 
 
 Route::group(['middleware' => 'auth'], function () {
